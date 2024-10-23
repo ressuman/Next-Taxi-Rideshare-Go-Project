@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navbar";
 
 const outfit = Outfit({
   subsets: ["latin"],
