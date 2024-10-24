@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     );
   }
   try {
-    const url = new URL(process.env.MAPBOX_BASE_URL as string);
+    const url = new URL(process.env.MAPBOX_BASE_SUGGEST_URL as string);
     url.searchParams.set("q", searchText);
     url.searchParams.set("language", "en");
     url.searchParams.set("limit", "10");
@@ -36,7 +36,7 @@ export async function GET(request: Request) {
     }
 
     const data = await res.json();
-    return NextResponse.json({ data });
+    return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching from Mapbox:", error);
     return NextResponse.json(
