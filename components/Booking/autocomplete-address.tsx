@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AddressList,
   getAddressList,
@@ -19,26 +21,32 @@ import { useContext, useEffect, useState } from "react";
 export default function AutocompleteAddress() {
   const [source, setSource] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
+  const [sourceSuggestions, setSourceSuggestions] =
+    useState<AddressList | null>(null);
+  const [destinationSuggestions, setDestinationSuggestions] =
+    useState<AddressList | null>(null);
   const [sourceChange, setSourceChange] = useState<boolean>(false);
   const [destinationChange, setDestinationChange] = useState<boolean>(false);
-  const [addressList, setAddressList] = useState<AddressList | null>(null);
+  //const [addressList, setAddressList] = useState<AddressList | null>(null);
 
+  // Fetch source suggestions
   useEffect(() => {
     const fetchAddress = setTimeout(async () => {
       if (source.trim()) {
         const result = await getAddressList(source);
-        setAddressList(result);
+        setSourceSuggestions(result);
       }
     }, 1000);
 
     return () => clearTimeout(fetchAddress);
   }, [source]);
 
+  // Fetch destination suggestions
   useEffect(() => {
     const fetchAddress = setTimeout(async () => {
       if (destination.trim()) {
         const result = await getAddressList(destination);
-        setAddressList(result);
+        setDestinationSuggestions(result);
       }
     }, 1000);
 
@@ -93,15 +101,19 @@ export default function AutocompleteAddress() {
           }}
         />
 
-        {addressList?.suggestions?.length && sourceChange && (
+        {sourceSuggestions?.suggestions?.length && sourceChange && (
           <div className="shadow-md p-1 rounded-md absolute w-full bg-white z-20">
-            {addressList?.suggestions.map((suggestion) => (
+            {sourceSuggestions?.suggestions.map((suggestion) => (
               <h2
                 key={suggestion.mapbox_id}
                 className="p-3 hover:bg-gray-100
                 cursor-pointer"
                 onClick={() =>
-                  handleSelectSuggestion(setSource, setAddressList, suggestion)
+                  handleSelectSuggestion(
+                    setSource,
+                    setSourceSuggestions,
+                    suggestion
+                  )
                 }
                 // onClick={() => {
                 //   setSource(suggestion.full_address);
@@ -135,12 +147,12 @@ export default function AutocompleteAddress() {
           }}
         />
 
-        {addressList?.suggestions?.length && destinationChange && (
+        {destinationSuggestions?.suggestions?.length && destinationChange && (
           <div
             className="shadow-md p-1 rounded-md
             absolute w-full bg-white"
           >
-            {addressList?.suggestions.map((suggestion) => (
+            {destinationSuggestions?.suggestions.map((suggestion) => (
               <h2
                 key={suggestion.mapbox_id}
                 className="p-3 hover:bg-gray-100
@@ -148,7 +160,7 @@ export default function AutocompleteAddress() {
                 onClick={() =>
                   handleSelectSuggestion(
                     setDestination,
-                    setAddressList,
+                    setDestinationSuggestions,
                     suggestion
                   )
                 }
