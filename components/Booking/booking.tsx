@@ -3,6 +3,7 @@
 import { useScreenHeight } from "@/hooks/useScreenHeight";
 import AutocompleteAddress from "./autocomplete-address";
 import Cars from "./cars";
+import PaymentCards from "./payment-cards";
 
 export default function Booking() {
   const screenHeight = useScreenHeight();
@@ -18,6 +19,7 @@ export default function Booking() {
       >
         <AutocompleteAddress />
         <Cars />
+        <PaymentCards />
         <button
           type="submit"
           className="w-full bg-yellow-400
