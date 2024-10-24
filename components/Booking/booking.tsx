@@ -2,6 +2,7 @@
 
 import { useScreenHeight } from "@/hooks/useScreenHeight";
 import AutocompleteAddress from "./autocomplete-address";
+import Cars from "./cars";
 
 export default function Booking() {
   const screenHeight = useScreenHeight();
@@ -16,6 +17,7 @@ export default function Booking() {
         style={{ height: `${screenHeight}px` }}
       >
         <AutocompleteAddress />
+        <Cars />
         <button
           type="submit"
           className="w-full bg-yellow-400

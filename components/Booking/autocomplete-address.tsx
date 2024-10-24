@@ -4,9 +4,8 @@ import {
   AddressList,
   getAddressList,
   handleSelectSuggestion,
-  Suggestion,
 } from "@/utils/getAddress";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // // Define types for Mapbox API response
 // interface Suggestion {
