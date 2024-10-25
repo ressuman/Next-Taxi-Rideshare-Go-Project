@@ -11,8 +11,8 @@ export default function MapboxMap() {
         <Map
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_ACCESS_TOKEN}
           initialViewState={{
-            longitude: -122.4,
-            latitude: 37.8,
+            longitude: -0.186964,
+            latitude: 5.603717,
             zoom: 14,
           }}
           style={{ width: "100%", height: 520, borderRadius: 10 }}
