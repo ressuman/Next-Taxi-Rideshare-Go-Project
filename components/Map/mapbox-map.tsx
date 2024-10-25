@@ -5,9 +5,17 @@ import { useContext } from "react";
 //import { Map } from "react-map-gl";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 
 export default function MapboxMap() {
-  const { userLocation, setUserLocation } = useContext(UserLocationContext);
+  //const { userLocation, setUserLocation } = useContext(UserLocationContext);
+  const { userLocation } = useContext(UserLocationContext) || {};
+  const { user } = useUser();
+
+  const userInitials = user?.firstName
+    ? `${user.firstName[0]}${user.lastName ? user.lastName[0] : ""}`
+    : user?.username?.[0]?.toUpperCase() || "";
 
   return (
     <div className="p-5">
@@ -31,7 +39,27 @@ export default function MapboxMap() {
               latitude={userLocation?.lat}
               anchor="bottom"
             >
-              <img src="./pin.png" className="w-10 h-10" alt="pin" />
+              {/* <img src="./pin.png" className="w-10 h-10" alt="pin" /> */}
+              {/* <div className="flex items-center justify-center w-10 h-10 bg-yellow-500 text-white font-bold rounded-full">
+                {userInitials}
+              </div> */}
+              <div className="relative w-10 h-10">
+                {/* <img
+                  src="/pin.png"
+                  alt="location pin"
+                  className="w-full h-full"
+                /> */}
+                <Image
+                  src="/pin.png"
+                  alt="location pin"
+                  layout="fill"
+                  objectFit="contain"
+                  className="rounded-full"
+                />
+                <span className="absolute inset-0 flex items-center justify-center text-white font-semibold">
+                  {userInitials}
+                </span>
+              </div>
             </Marker>
           </Map>
         )}

@@ -18,12 +18,16 @@ export default function HomePage() {
   }, []);
 
   function getUserLocation(): void {
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      setUserLocation({
-        lat: pos.coords.latitude,
-        lng: pos.coords.longitude,
-      });
-    });
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        setUserLocation({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        });
+      },
+      (error) => console.error("Error fetching user location:", error),
+      { enableHighAccuracy: true }
+    );
   }
 
   return (
