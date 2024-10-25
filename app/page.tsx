@@ -29,7 +29,6 @@ export default function HomePage() {
   return (
     <div className="">
       <UserLocationContext.Provider value={{ userLocation, setUserLocation }}>
-        {" "}
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="">
             <Booking />
