@@ -1,12 +1,11 @@
 "use client";
 
-import { useScreenHeight } from "@/hooks/useScreenHeight";
 import AutocompleteAddress from "./autocomplete-address";
 import Cars from "./cars";
 import PaymentCards from "./payment-cards";
 
 export default function Booking() {
-  const screenHeight = useScreenHeight();
+  const screenHeight = window.innerHeight * 0.72;
 
   return (
     <div className="p-5">
@@ -15,7 +14,7 @@ export default function Booking() {
       <div
         className="border-[1px] p-5
         rounded-md"
-        style={{ height: `${screenHeight}px` }}
+        style={{ height: `${screenHeight}` }}
       >
         <AutocompleteAddress />
         <Cars />

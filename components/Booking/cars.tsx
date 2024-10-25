@@ -19,7 +19,8 @@ export default function Cars() {
       <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3">
         {CarsList.map((car: Car) => {
           return (
-            <div
+            <button
+              type="button"
               key={car.id}
               className={`m-2 p-2 border-[1px] rounded-md hover:border-yellow-400 cursor-pointer ${
                 car.id === selectedCar ? "border-yellow-400 border-[2px]" : ""
@@ -37,7 +38,7 @@ export default function Cars() {
               <span className="float-right font-medium text-black">
                 {car.charges * 8}
               </span>
-            </div>
+            </button>
           );
         })}
       </div>

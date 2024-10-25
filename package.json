@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^5.7.5",
+    "@types/mapbox-gl": "^3.4.0",
+    "mapbox-gl": "^3.7.0",
     "next": "14.2.15",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-map-gl": "^7.1.7"
   },
   "devDependencies": {
     "@types/node": "^20",

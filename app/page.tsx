@@ -1,4 +1,5 @@
 import Booking from "@/components/Booking/booking";
+import MapboxMap from "@/components/Map/mapbox-map";
 
 export default function HomePage() {
   return (
@@ -12,7 +13,7 @@ export default function HomePage() {
           className="col-span-2
         "
         >
-          Mapping
+          <MapboxMap />
         </div>
       </div>
     </div>
