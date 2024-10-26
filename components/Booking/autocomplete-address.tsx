@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
+import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
+import { useContext, useEffect, useState } from "react";
 
 export default function AutocompleteAddress() {
   const [source, setSource] = useState<any>();
@@ -6,9 +8,13 @@ export default function AutocompleteAddress() {
   const [destinationChange, setDestinationChange] = useState<any>(false);
   const [addressList, setAddressList] = useState<any>([]);
   const [destination, setDestination] = useState<any>();
-  const [sourceCoordinates, setSourceCoordinates] = useStateuseState<any>([]);
-  const [destinationCoordinates, setDestinationCoordinates] =
-    useStateuseState<any>([]);
+
+  const { sourceCoordinates, setSourceCoordinates } = useContext(
+    SourceCoordinatesContext
+  );
+  const { destinationCoordinates, setDestinationCoordinates } = useContext(
+    DestinationCoordinatesContext
+  );
 
   const getAddressList = async () => {
     setAddressList([]);
