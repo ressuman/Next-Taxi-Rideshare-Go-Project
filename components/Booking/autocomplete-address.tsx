@@ -1,86 +1,31 @@
-"use client";
-
-import {
-  AddressList,
-  getAddressList,
-  handleSelectSuggestion,
-} from "@/utils/getAddress";
 import { useEffect, useState } from "react";
 
-// // Define types for Mapbox API response
-// interface Suggestion {
-//   mapbox_id: string;
-//   full_address: string;
-// }
-
-// interface AddressList {
-//   suggestions: Suggestion[];
-// }
-
 export default function AutocompleteAddress() {
-  const [source, setSource] = useState<string>("");
-  const [destination, setDestination] = useState<string>("");
-  const [sourceSuggestions, setSourceSuggestions] =
-    useState<AddressList | null>(null);
-  const [destinationSuggestions, setDestinationSuggestions] =
-    useState<AddressList | null>(null);
-  const [sourceChange, setSourceChange] = useState<boolean>(false);
-  const [destinationChange, setDestinationChange] = useState<boolean>(false);
-  //const [addressList, setAddressList] = useState<AddressList | null>(null);
+  const [source, setSource] = useState<any>();
+  const [sourceChange, setSourceChange] = useState<any>(false);
+  const [destinationChange, setDestinationChange] = useState<any>(false);
+  const [addressList, setAddressList] = useState<any>([]);
+  const [destination, setDestination] = useState<any>();
 
-  // Fetch source suggestions
+  const getAddressList = async () => {
+    setAddressList([]);
+    const query = sourceChange ? source : destination;
+    const res = await fetch("/api/search-address?q=" + query, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await res.json();
+    setAddressList(result);
+  };
+
   useEffect(() => {
-    const fetchAddress = setTimeout(async () => {
-      if (source.trim()) {
-        const result = await getAddressList(source);
-        setSourceSuggestions(result);
-      }
+    const delayDebounceFn = setTimeout(() => {
+      getAddressList();
     }, 1000);
-
-    return () => clearTimeout(fetchAddress);
-  }, [source]);
-
-  // Fetch destination suggestions
-  useEffect(() => {
-    const fetchAddress = setTimeout(async () => {
-      if (destination.trim()) {
-        const result = await getAddressList(destination);
-        setDestinationSuggestions(result);
-      }
-    }, 1000);
-
-    return () => clearTimeout(fetchAddress);
-  }, [destination]);
-
-  // async function getAddressList() {
-  //   try {
-  //     const res = await fetch(`/api/search-address?q=${source}`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (!res.ok) {
-  //       throw new Error("Failed to fetch address suggestions");
-  //     }
-
-  //     const result: AddressList = await res.json();
-  //     setAddressList(result);
-  //   } catch (error) {
-  //     console.error("Error fetching address suggestions:", error);
-  //   }
-  // }
-
-  // const handleSelectSuggestion = (fullAddress: string, isSource: boolean) => {
-  //   if (isSource) {
-  //     setSource(fullAddress);
-  //     setSourceChange(false);
-  //   } else {
-  //     setDestination(fullAddress);
-  //     setDestinationChange(false);
-  //   }
-  //   setAddressList(null);
-  // };
+    return () => clearTimeout(delayDebounceFn);
+  }, [source, destination]);
 
   return (
     <form className="mt-5">
@@ -100,28 +45,18 @@ export default function AutocompleteAddress() {
           }}
         />
 
-        {sourceSuggestions?.suggestions?.length && sourceChange && (
+        {addressList?.suggestions && sourceChange && (
           <div className="shadow-md p-1 rounded-md absolute w-full bg-white z-20">
-            {sourceSuggestions?.suggestions.map((suggestion) => (
+            {addressList?.suggestions.map((suggestion: any) => (
               <h2
                 key={suggestion.mapbox_id}
                 className="p-3 hover:bg-gray-100
                 cursor-pointer"
-                onClick={() =>
-                  handleSelectSuggestion(
-                    setSource,
-                    setSourceSuggestions,
-                    suggestion
-                  )
-                }
-                // onClick={() => {
-                //   setSource(suggestion.full_address);
-                //   setAddressList([]);
-                //   setSourceChange(false);
-                // }}
-                // onClick={() => {
-                //   onSourceAddressClick(suggestion);
-                // }}
+                onClick={() => {
+                  setSource(suggestion.full_address);
+                  setAddressList([]);
+                  setSourceChange(false);
+                }}
               >
                 {suggestion.full_address}
               </h2>
@@ -146,31 +81,21 @@ export default function AutocompleteAddress() {
           }}
         />
 
-        {destinationSuggestions?.suggestions?.length && destinationChange && (
+        {addressList?.suggestions && destinationChange && (
           <div
             className="shadow-md p-1 rounded-md
             absolute w-full bg-white"
           >
-            {destinationSuggestions?.suggestions.map((suggestion) => (
+            {addressList?.suggestions.map((suggestion: any) => (
               <h2
                 key={suggestion.mapbox_id}
                 className="p-3 hover:bg-gray-100
                 cursor-pointer"
-                onClick={() =>
-                  handleSelectSuggestion(
-                    setDestination,
-                    setDestinationSuggestions,
-                    suggestion
-                  )
-                }
-                // onClick={() => {
-                //   setDestination(suggestion.full_address);
-                //   setAddressList([]);
-                //   setDestinationChange(false);
-                // }}
-                // onClick={() => {
-                //   onSourceAddressClick(suggestion);
-                // }}
+                onClick={() => {
+                  setDestination(suggestion.full_address);
+                  setAddressList([]);
+                  setDestinationChange(false);
+                }}
               >
                 {suggestion.full_address}
               </h2>

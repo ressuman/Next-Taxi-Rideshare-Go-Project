@@ -1,6 +1,7 @@
 "use client";
 
 import AutocompleteAddress from "./autocomplete-address";
+//import AutocompleteAddress from "./autocomplete-address1";
 import Cars from "./cars";
 import PaymentCards from "./payment-cards";
 
@@ -16,6 +17,7 @@ export default function Booking() {
         rounded-md"
         style={{ height: `${screenHeight}` }}
       >
+        {/* <AutocompleteAddress /> */}
         <AutocompleteAddress />
         <Cars />
         <PaymentCards />
