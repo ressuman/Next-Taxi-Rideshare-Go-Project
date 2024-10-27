@@ -60,7 +60,7 @@ export default function Markers() {
         >
           <div className="relative w-10 h-10">
             <Image
-              src="/pin.png"
+              src="/location.png"
               alt="location pin"
               layout="fill"
               objectFit="contain"

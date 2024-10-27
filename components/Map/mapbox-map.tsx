@@ -35,7 +35,38 @@ export default function MapboxMap() {
         duration: 2500,
       });
     }
+
+    if (sourceCoordinates && destinationCoordinates) {
+      getDirectionRoute();
+    }
   }, [destinationCoordinates]);
+
+  async function getDirectionRoute() {
+    if (!sourceCoordinates || !destinationCoordinates) {
+      console.error("Source or destination coordinates are missing");
+      return;
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_MAPBOX_BASE_RETRIEVE_DIRECTIONS_URL}/${sourceCoordinates.lng},${sourceCoordinates.lat};${destinationCoordinates.lng},${destinationCoordinates.lat}?overview=full&geometries=geojson&access_token=${process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_ACCESS_TOKEN}`;
+
+    try {
+      const res = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`Mapbox API error: ${res.statusText}`);
+      }
+
+      const result = await res.json();
+      console.log("Full result:", result);
+      console.log("Routes:", result.routes);
+    } catch (error) {
+      console.error("Error fetching route data:", error);
+    }
+  }
 
   return (
     <div className="p-5">
