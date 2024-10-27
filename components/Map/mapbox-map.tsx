@@ -7,6 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Markers from "./markers";
 import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
 import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
+import { DirectionsDataContext } from "@/context/directions-data-context";
 
 export default function MapboxMap() {
   //const { userLocation, setUserLocation } = useContext(UserLocationContext);
@@ -17,6 +18,9 @@ export default function MapboxMap() {
   );
   const { destinationCoordinates, setDestinationCoordinates } = useContext(
     DestinationCoordinatesContext
+  );
+  const { directionsData, setDirectionsData } = useContext(
+    DirectionsDataContext
   );
 
   useEffect(() => {
@@ -63,6 +67,8 @@ export default function MapboxMap() {
       const result = await res.json();
       console.log("Full result:", result);
       console.log("Routes:", result.routes);
+
+      setDirectionsData(result);
     } catch (error) {
       console.error("Error fetching route data:", error);
     }
