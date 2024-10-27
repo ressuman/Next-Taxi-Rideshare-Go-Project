@@ -1,11 +1,12 @@
 import { Layer, Source } from "react-map-gl";
 
-export default function MapboxRoute(props: any) {
+export default function MapboxRoute({ coordinates }) {
   return (
     <Source
+      type="geojson"
       data={{
         type: "Feature",
-        geometry: { type: "LineString", coordinates: props.coordinates },
+        geometry: { type: "LineString", coordinates: coordinates },
       }}
     >
       <Layer
