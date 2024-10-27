@@ -8,7 +8,11 @@ export default function MapboxRoute({ coordinates }) {
         geometry: { type: "LineString", coordinates: coordinates },
       }}
     >
-      <Layer />
+      <Layer
+        type="line"
+        layout={{ "line-join": "round", "line-cap": "square" }}
+        paint={{ "line-color": "#0462d4", "line-width": 4 }}
+      />
     </Source>
   );
 }
