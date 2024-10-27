@@ -6,6 +6,7 @@ import Map from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Markers from "./markers";
 import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
+import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
 
 export default function MapboxMap() {
   //const { userLocation, setUserLocation } = useContext(UserLocationContext);
@@ -13,6 +14,9 @@ export default function MapboxMap() {
   const { userLocation } = useContext(UserLocationContext) || {};
   const { sourceCoordinates, setSourceCoordinates } = useContext(
     SourceCoordinatesContext
+  );
+  const { destinationCoordinates, setDestinationCoordinates } = useContext(
+    DestinationCoordinatesContext
   );
 
   useEffect(() => {
@@ -23,6 +27,15 @@ export default function MapboxMap() {
       });
     }
   }, [sourceCoordinates]);
+
+  useEffect(() => {
+    if (destinationCoordinates) {
+      mapRef.current?.flyTo({
+        center: [destinationCoordinates.lng, destinationCoordinates.lat],
+        duration: 2500,
+      });
+    }
+  }, [destinationCoordinates]);
 
   return (
     <div className="p-5">
