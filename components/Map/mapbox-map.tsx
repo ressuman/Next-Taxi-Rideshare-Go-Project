@@ -8,6 +8,7 @@ import Markers from "./markers";
 import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
 import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
 import { DirectionsDataContext } from "@/context/directions-data-context";
+import MapboxRoute from "./mapbox-route";
 
 export default function MapboxMap() {
   //const { userLocation, setUserLocation } = useContext(UserLocationContext);
@@ -93,6 +94,12 @@ export default function MapboxMap() {
             mapStyle="mapbox://styles/mapbox/streets-v9"
           >
             <Markers />
+
+            {directionsData?.routes && (
+              <MapboxRoute
+                coordinates={directionsData?.routes[0]?.geometry?.coordinates}
+              />
+            )}
           </Map>
         )}
       </div>
