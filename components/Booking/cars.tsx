@@ -1,6 +1,10 @@
+"use client";
+
+import { DirectionsDataContext } from "@/context/directions-data-context";
 import CarsList from "@/data/CarsList";
+
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // Define the Car type, ensuring consistency with CarsList
 interface Car {
@@ -12,6 +16,24 @@ interface Car {
 
 export default function Cars() {
   const [selectedCar, setSelectedCar] = useState<number | undefined>(undefined);
+
+  const { directionsData, setDirectionsData } = useContext(
+    DirectionsDataContext
+  );
+
+  const getCost = (charges: number) => {
+    if (!directionsData?.routes || directionsData.routes.length === 0)
+      return "0.00";
+
+    const distanceInKm = directionsData.routes[0].distance / 1000;
+    const timeInMinutes = directionsData.routes[0].duration / 60;
+
+    const trafficMultiplier = 1.2;
+
+    const cost =
+      charges * (distanceInKm + timeInMinutes * 0.1) * trafficMultiplier;
+    return cost.toFixed(2);
+  };
 
   return (
     <div className="mt-3">
@@ -34,10 +56,14 @@ export default function Cars() {
                 height={90}
                 className="w-full"
               />
-              <h2 className="text-[10px] text-gray-500">{car.name}</h2>
-              <span className="float-right font-medium text-black">
-                {car.charges * 8}
-              </span>
+              <h2 className="text-[10px] text-gray-500">
+                {car.name}
+                {directionsData?.routes && (
+                  <span className="float-right font-medium text-black">
+                    {getCost(car.charges)} $
+                  </span>
+                )}
+              </h2>
             </button>
           );
         })}
