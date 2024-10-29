@@ -25,8 +25,8 @@ export default function Cars() {
     if (!directionsData?.routes || directionsData.routes.length === 0)
       return "0.00";
 
-    const distanceInKm = directionsData.routes[0].distance / 1000;
-    const timeInMinutes = directionsData.routes[0].duration / 60;
+    const distanceInKm = directionsData?.routes[0]?.distance / 1000;
+    const timeInMinutes = directionsData?.routes[0]?.duration / 60;
 
     const trafficMultiplier = 1.2;
 

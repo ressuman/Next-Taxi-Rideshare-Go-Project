@@ -9,6 +9,7 @@ import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
 import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
 import { DirectionsDataContext } from "@/context/directions-data-context";
 import MapboxRoute from "./mapbox-route";
+import DistanceTime from "./distanceTime";
 
 export default function MapboxMap() {
   //const { userLocation, setUserLocation } = useContext(UserLocationContext);
@@ -102,6 +103,9 @@ export default function MapboxMap() {
             )}
           </Map>
         )}
+      </div>
+      <div className="absolute bottom-[170px] z-20 right-[20px] hidden md:block">
+        <DistanceTime />
       </div>
     </div>
   );
