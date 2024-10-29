@@ -4,6 +4,7 @@ import Booking from "@/components/Booking/booking";
 import MapboxMap from "@/components/Map/mapbox-map";
 import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
 import { DirectionsDataContext } from "@/context/directions-data-context";
+import { SelectedCarAmountContext } from "@/context/selected-car-amount-context";
 import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
 import { UserLocationContext } from "@/context/user-location-context";
 import { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ export default function HomePage() {
   const [sourceCoordinates, setSourceCoordinates] = useState<any>([]);
   const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
   const [directionsData, setDirectionsData] = useState<any>([]);
+  const [carAmount, setCarAmount] = useState<any>();
 
   useEffect(() => {
     getUserLocation();
@@ -48,18 +50,22 @@ export default function HomePage() {
             <DirectionsDataContext.Provider
               value={{ directionsData, setDirectionsData }}
             >
-              <div className="grid grid-cols-1 md:grid-cols-3">
-                <div className="">
-                  <Booking />
-                </div>
+              <SelectedCarAmountContext.Provider
+                value={{ carAmount, setCarAmount }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-3">
+                  <div className="">
+                    <Booking />
+                  </div>
 
-                <div
-                  className="col-span-2
+                  <div
+                    className="col-span-2
         "
-                >
-                  <MapboxMap />
+                  >
+                    <MapboxMap />
+                  </div>
                 </div>
-              </div>
+              </SelectedCarAmountContext.Provider>
             </DirectionsDataContext.Provider>
           </DestinationCoordinatesContext.Provider>
         </SourceCoordinatesContext.Provider>

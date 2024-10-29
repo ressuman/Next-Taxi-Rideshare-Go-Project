@@ -14,7 +14,7 @@ interface Car {
   charges: number;
 }
 
-export default function Cars() {
+export default function Cars({ onCarSelectAmount }: any) {
   const [selectedCar, setSelectedCar] = useState<number | undefined>(undefined);
 
   const { directionsData, setDirectionsData } = useContext(
@@ -47,7 +47,10 @@ export default function Cars() {
               className={`m-2 p-2 border-[1px] rounded-md hover:border-yellow-400 cursor-pointer ${
                 car.id === selectedCar ? "border-yellow-400 border-[2px]" : ""
               }`}
-              onClick={() => setSelectedCar(car.id)}
+              onClick={() => {
+                setSelectedCar(car.id);
+                onCarSelectAmount(getCost(car.charges));
+              }}
             >
               <Image
                 src={car.image}
