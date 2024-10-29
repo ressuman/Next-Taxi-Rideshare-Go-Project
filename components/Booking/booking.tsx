@@ -1,18 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useContext } from "react";
 import AutocompleteAddress from "./autocomplete-address";
 //import AutocompleteAddress from "./autocomplete-address1";
 import Cars from "./cars";
 import PaymentCards from "./payment-cards";
 import { useRouter } from "next/navigation";
+import { SelectedCarAmountContext } from "@/context/selected-car-amount-context";
 
 export default function Booking() {
   //const screenHeight = window.innerHeight * 0.72;
 
-  const [amount, setAmount] = useState();
-
   const router: any = useRouter();
+
+  const { carAmount, setCarAmount } = useContext(SelectedCarAmountContext);
 
   return (
     <div className="p-5">
@@ -25,12 +26,12 @@ export default function Booking() {
       >
         {/* <AutocompleteAddress /> */}
         <AutocompleteAddress />
-        <Cars onCarSelectAmount={(amount: any) => setAmount(amount)} />
+        <Cars />
         <PaymentCards />
         <button
           type="submit"
           className={`w-full bg-yellow-400 p-1 rounded-md
-        mt-4 ${!amount ? "bg-gray-200" : ""}`}
+        mt-4 ${!carAmount ? "bg-gray-200" : ""}`}
           onClick={() => router.push("/payment")}
         >
           Book

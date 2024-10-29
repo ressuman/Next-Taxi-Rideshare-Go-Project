@@ -1,6 +1,7 @@
 "use client";
 
 import { DirectionsDataContext } from "@/context/directions-data-context";
+import { SelectedCarAmountContext } from "@/context/selected-car-amount-context";
 import CarsList from "@/data/CarsList";
 
 import Image from "next/image";
@@ -14,12 +15,13 @@ interface Car {
   charges: number;
 }
 
-export default function Cars({ onCarSelectAmount }: any) {
+export default function Cars() {
   const [selectedCar, setSelectedCar] = useState<number | undefined>(undefined);
 
   const { directionsData, setDirectionsData } = useContext(
     DirectionsDataContext
   );
+  const { carAmount, setCarAmount } = useContext(SelectedCarAmountContext);
 
   const getCost = (charges: number) => {
     if (!directionsData?.routes || directionsData.routes.length === 0)
@@ -49,7 +51,7 @@ export default function Cars({ onCarSelectAmount }: any) {
               }`}
               onClick={() => {
                 setSelectedCar(car.id);
-                onCarSelectAmount(getCost(car.charges));
+                setCarAmount(getCost(car.charges));
               }}
             >
               <Image
