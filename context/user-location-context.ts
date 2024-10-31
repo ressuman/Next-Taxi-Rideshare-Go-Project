@@ -1,18 +1,33 @@
-import { createContext } from "react";
+// import { createContext } from "react";
 
-export const UserLocationContext = createContext(null);
+// export const UserLocationContext = createContext(null);
 
-// import { createContext, Dispatch, SetStateAction } from "react";
+// // import { createContext, Dispatch, SetStateAction } from "react";
 
-// interface Location {
-//   lat: number;
-//   lng: number;
-// }
+// // interface Location {
+// //   lat: number;
+// //   lng: number;
+// // }
 
-// interface UserLocationContextProps {
-//   userLocation: Location | null;
-//   setUserLocation: Dispatch<SetStateAction<Location | null>>;
-// }
+// // interface UserLocationContextProps {
+// //   userLocation: Location | null;
+// //   setUserLocation: Dispatch<SetStateAction<Location | null>>;
+// // }
 
-// export const UserLocationContext =
-//   createContext<UserLocationContextProps | null>(null);
+// // export const UserLocationContext =
+// //   createContext<UserLocationContextProps | null>(null);
+
+import { createContext, Dispatch, SetStateAction } from "react";
+
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
+interface UserLocationContextType {
+  userLocation: Coordinates | null;
+  setUserLocation: Dispatch<SetStateAction<Coordinates | null>>;
+}
+
+export const UserLocationContext =
+  createContext<UserLocationContextType | null>(null);
