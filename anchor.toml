@@ -1,0 +1,10 @@
+[lcl-host]
+realm-apid = 'localhost'
+
+[org]
+apid = 'ressuman'
+
+[service]
+apid = 'personal-project-41-next-taxi-rideshare-go-project'
+category = 'javascript'
+cert-style = 'acme'
