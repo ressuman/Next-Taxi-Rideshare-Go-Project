@@ -3,10 +3,16 @@
 import Booking from "@/components/Booking/booking";
 import MapboxMap from "@/components/Map/mapbox-map";
 import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
-import { DirectionsDataContext } from "@/context/directions-data-context";
+import {
+  DirectionsData,
+  DirectionsDataContext,
+} from "@/context/directions-data-context";
 import { SelectedCarAmountContext } from "@/context/selected-car-amount-context";
-import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
-import { UserLocationContext } from "@/context/user-location-context";
+import {
+  Coordinates,
+  SourceCoordinatesContext,
+} from "@/context/source-coordinates-context";
+import { Location, UserLocationContext } from "@/context/user-location-context";
 import { useEffect, useMemo, useState } from "react";
 
 // interface Location {
@@ -14,15 +20,32 @@ import { useEffect, useMemo, useState } from "react";
 //   lng: number;
 // }
 
-interface Coordinates {
-  lat: number;
-  lng: number;
-}
+// Define the types for state variables
+// type GeometryType =
+//   | "LineString"
+//   | "Point"
+//   | "Polygon"
+//   | "MultiLineString"
+//   | "MultiPoint"
+//   | "MultiPolygon";
 
-interface DirectionStep {
-  distance: number;
-  instruction: string;
-}
+// interface Coordinates {
+//   lat: number;
+//   lng: number;
+// }
+
+// interface DirectionsData {
+//   distance: number;
+//   duration: number;
+//   routes: Array<{
+//     distance: number;
+//     duration: number;
+//     geometry: {
+//       type: GeometryType;
+//       coordinates: Array<[number, number]>;
+//     };
+//   }>;
+// }
 
 export default function HomePage() {
   // const [userLocation, setUserLocation] = useState<Location | null>(null);
@@ -31,13 +54,16 @@ export default function HomePage() {
   // const [directionsData, setDirectionsData] = useState<any>([]);
   // const [carAmount, setCarAmount] = useState<any>();
 
-  const [userLocation, setUserLocation] = useState<Coordinates | null>(null);
-  const [sourceCoordinates, setSourceCoordinates] = useState<Coordinates[]>([]);
-  const [destinationCoordinates, setDestinationCoordinates] = useState<
-    Coordinates[]
-  >([]);
-  const [directionsData, setDirectionsData] = useState<DirectionStep[]>([]);
-  const [carAmount, setCarAmount] = useState<number>(0);
+  const [userLocation, setUserLocation] = useState<Location | null>(null);
+  const [sourceCoordinates, setSourceCoordinates] =
+    useState<Coordinates | null>(null);
+  const [destinationCoordinates, setDestinationCoordinates] =
+    useState<Coordinates | null>(null);
+
+  const [directionsData, setDirectionsData] = useState<DirectionsData | null>(
+    null
+  );
+  const [carAmount, setCarAmount] = useState<string | null>(null);
 
   // useEffect(() => {
   //   getUserLocation();

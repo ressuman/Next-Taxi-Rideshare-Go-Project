@@ -19,15 +19,14 @@
 
 import { createContext, Dispatch, SetStateAction } from "react";
 
-interface Coordinates {
+// Define the type for user location coordinates
+export interface Location {
   lat: number;
   lng: number;
 }
 
-interface UserLocationContextType {
-  userLocation: Coordinates | null;
-  setUserLocation: Dispatch<SetStateAction<Coordinates | null>>;
-}
-
-export const UserLocationContext =
-  createContext<UserLocationContextType | null>(null);
+// Create context with type safety for user location and setter function
+export const UserLocationContext = createContext<{
+  userLocation: Location | null;
+  setUserLocation: Dispatch<SetStateAction<Location | null>>;
+} | null>(null);

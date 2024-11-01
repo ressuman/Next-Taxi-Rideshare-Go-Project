@@ -4,15 +4,14 @@
 
 import { createContext, Dispatch, SetStateAction } from "react";
 
-interface Coordinates {
+// Define the type for source coordinates
+export interface Coordinates {
   lat: number;
   lng: number;
 }
 
-interface SourceCoordinatesContextType {
-  sourceCoordinates: Coordinates[];
-  setSourceCoordinates: Dispatch<SetStateAction<Coordinates[]>>;
-}
-
-export const SourceCoordinatesContext =
-  createContext<SourceCoordinatesContextType | null>(null);
+// Create context with type safety for coordinates and the setter function
+export const SourceCoordinatesContext = createContext<{
+  sourceCoordinates: Coordinates | null;
+  setSourceCoordinates: Dispatch<SetStateAction<Coordinates | null>>;
+} | null>(null);

@@ -4,10 +4,8 @@
 
 import { createContext, Dispatch, SetStateAction } from "react";
 
-interface SelectedCarAmountContextType {
-  carAmount: number;
-  setCarAmount: Dispatch<SetStateAction<number>>;
-}
-
-export const SelectedCarAmountContext =
-  createContext<SelectedCarAmountContextType | null>(null);
+// Create context with type safety for car amount and its setter
+export const SelectedCarAmountContext = createContext<{
+  carAmount: string | null;
+  setCarAmount: Dispatch<SetStateAction<string | null>>;
+} | null>(null);

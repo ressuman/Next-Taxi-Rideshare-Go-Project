@@ -4,15 +4,31 @@
 
 import { createContext, Dispatch, SetStateAction } from "react";
 
-interface DirectionStep {
+// Define the type for geometry
+export type GeometryType =
+  | "LineString"
+  | "Point"
+  | "Polygon"
+  | "MultiLineString"
+  | "MultiPoint"
+  | "MultiPolygon";
+
+// Define the type for direction data
+export interface DirectionsData {
   distance: number;
-  instruction: string;
+  duration: number;
+  routes: Array<{
+    distance: number;
+    duration: number;
+    geometry: {
+      type: GeometryType;
+      coordinates: Array<[number, number]>;
+    };
+  }>;
 }
 
-interface DirectionsDataContextType {
-  directionsData: DirectionStep[];
-  setDirectionsData: Dispatch<SetStateAction<DirectionStep[]>>;
-}
-
-export const DirectionsDataContext =
-  createContext<DirectionsDataContextType | null>(null);
+// Create context with type safety for direction data and the setter function
+export const DirectionsDataContext = createContext<{
+  directionsData: DirectionsData | null;
+  setDirectionsData: Dispatch<SetStateAction<DirectionsData | null>>;
+} | null>(null);

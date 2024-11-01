@@ -1,6 +1,6 @@
 import { DestinationCoordinatesContext } from "@/context/destination-coordinates-context";
 import { SourceCoordinatesContext } from "@/context/source-coordinates-context";
-import { UserLocationContext } from "@/context/user-location-context";
+//import { UserLocationContext } from "@/context/user-location-context";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useContext } from "react";
@@ -9,18 +9,20 @@ import { Marker } from "react-map-gl";
 export default function Markers() {
   const { user } = useUser();
 
-  const { userLocation, setUserLocation } =
-    useContext(UserLocationContext) || {};
-  const { sourceCoordinates, setSourceCoordinates } = useContext(
-    SourceCoordinatesContext
-  );
-  const { destinationCoordinates, setDestinationCoordinates } = useContext(
-    DestinationCoordinatesContext
-  );
+  //const { userLocation } = useContext(UserLocationContext) ?? {};
+  const { sourceCoordinates } = useContext(SourceCoordinatesContext) ?? {};
+  const { destinationCoordinates } =
+    useContext(DestinationCoordinatesContext) ?? {};
 
-  const userInitials = user?.firstName
-    ? `${user.firstName[0]}${user.lastName ? user.lastName[0] : ""}`
-    : user?.username?.[0]?.toUpperCase() || "";
+  let userInitials = "";
+  if (user?.firstName) {
+    userInitials = `${user.firstName[0]}`;
+    if (user.lastName) {
+      userInitials += `${user.lastName[0]}`;
+    }
+  } else {
+    userInitials = user?.username?.[0]?.toUpperCase() ?? "";
+  }
 
   return (
     <div>
@@ -52,7 +54,7 @@ export default function Markers() {
       {/* </div>
       </Marker> */}
 
-      {sourceCoordinates?.length !== 0 && (
+      {sourceCoordinates && (
         <Marker
           longitude={sourceCoordinates?.lng}
           latitude={sourceCoordinates?.lat}
@@ -73,7 +75,7 @@ export default function Markers() {
         </Marker>
       )}
 
-      {destinationCoordinates?.length !== 0 && (
+      {destinationCoordinates && (
         <Marker
           longitude={destinationCoordinates?.lng}
           latitude={destinationCoordinates?.lat}

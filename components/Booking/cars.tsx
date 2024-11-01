@@ -16,22 +16,23 @@ interface Car {
 }
 
 export default function Cars() {
-  const [selectedCar, setSelectedCar] = useState<number | undefined>(undefined);
+  // const [selectedCar, setSelectedCar] = useState<number | undefined>(undefined);
 
-  const { directionsData, setDirectionsData } = useContext(
-    DirectionsDataContext
-  );
-  const { carAmount, setCarAmount } = useContext(SelectedCarAmountContext);
+  // const { directionsData, setDirectionsData } = useContext(
+  //   DirectionsDataContext
+  // );
+  // const { carAmount, setCarAmount } = useContext(SelectedCarAmountContext);
+
+  const [selectedCar, setSelectedCar] = useState<number | null>(null);
+  const { directionsData } = useContext(DirectionsDataContext) ?? {};
+  const { setCarAmount } = useContext(SelectedCarAmountContext) ?? {};
 
   const getCost = (charges: number) => {
     if (!directionsData?.routes || directionsData.routes.length === 0)
       return "0.00";
-
-    const distanceInKm = directionsData?.routes[0]?.distance / 1000;
-    const timeInMinutes = directionsData?.routes[0]?.duration / 60;
-
+    const distanceInKm = directionsData.routes[0].distance / 1000;
+    const timeInMinutes = directionsData.routes[0].duration / 60;
     const trafficMultiplier = 1.2;
-
     const cost =
       charges * (distanceInKm + timeInMinutes * 0.1) * trafficMultiplier;
     return cost.toFixed(2);
@@ -51,7 +52,9 @@ export default function Cars() {
               }`}
               onClick={() => {
                 setSelectedCar(car.id);
-                setCarAmount(getCost(car.charges));
+                if (setCarAmount) {
+                  setCarAmount(getCost(car.charges));
+                }
               }}
             >
               <Image
