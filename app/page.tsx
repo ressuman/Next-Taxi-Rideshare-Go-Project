@@ -15,45 +15,7 @@ import {
 import { Location, UserLocationContext } from "@/context/user-location-context";
 import { useEffect, useMemo, useState } from "react";
 
-// interface Location {
-//   lat: number;
-//   lng: number;
-// }
-
-// Define the types for state variables
-// type GeometryType =
-//   | "LineString"
-//   | "Point"
-//   | "Polygon"
-//   | "MultiLineString"
-//   | "MultiPoint"
-//   | "MultiPolygon";
-
-// interface Coordinates {
-//   lat: number;
-//   lng: number;
-// }
-
-// interface DirectionsData {
-//   distance: number;
-//   duration: number;
-//   routes: Array<{
-//     distance: number;
-//     duration: number;
-//     geometry: {
-//       type: GeometryType;
-//       coordinates: Array<[number, number]>;
-//     };
-//   }>;
-// }
-
 export default function HomePage() {
-  // const [userLocation, setUserLocation] = useState<Location | null>(null);
-  // const [sourceCoordinates, setSourceCoordinates] = useState<any>([]);
-  // const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
-  // const [directionsData, setDirectionsData] = useState<any>([]);
-  // const [carAmount, setCarAmount] = useState<any>();
-
   const [userLocation, setUserLocation] = useState<Location | null>(null);
   const [sourceCoordinates, setSourceCoordinates] =
     useState<Coordinates | null>(null);
@@ -64,23 +26,6 @@ export default function HomePage() {
     null
   );
   const [carAmount, setCarAmount] = useState<string | null>(null);
-
-  // useEffect(() => {
-  //   getUserLocation();
-  // }, []);
-
-  // function getUserLocation(): void {
-  //   navigator.geolocation.getCurrentPosition(
-  //     function (pos) {
-  //       setUserLocation({
-  //         lat: pos.coords.latitude,
-  //         lng: pos.coords.longitude,
-  //       });
-  //     },
-  //     (error) => console.error("Error fetching user location:", error),
-  //     { enableHighAccuracy: true }
-  //   );
-  // }
 
   useEffect(() => {
     fetchUserLocation();

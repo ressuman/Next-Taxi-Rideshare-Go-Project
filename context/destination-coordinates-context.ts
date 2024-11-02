@@ -1,7 +1,3 @@
-// import { createContext } from "react";
-
-// export const DestinationCoordinatesContext = createContext<any>(null);
-
 import { createContext, Dispatch, SetStateAction } from "react";
 
 export interface Coordinates {

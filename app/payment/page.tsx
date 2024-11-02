@@ -17,20 +17,6 @@ export default function PaymentPage() {
     process.env.NEXT_PUBLIC_STRIPE_PUBLIC_PUBLISHABLE_KEY!
   );
 
-  // // Convert amount to cents for Stripe
-  // const amountInCents = amount
-  //   ? convertToSubcurrency(Number(amount))
-  //   : undefined;
-
-  // // Format the displayed amount in dollars
-  // const displayAmount = amountInCents
-  //   ? (amountInCents / 100).toFixed(2)
-  //   : "0.00";
-
-  // const convertedAmount = amount
-  //   ? convertToSubcurrency(Number(amount))
-  //   : undefined;
-
   // Convert the raw dollar amount to cents using `convertToSubcurrency`
   const convertedAmount = amount
     ? convertToSubcurrency(Number(amount))
