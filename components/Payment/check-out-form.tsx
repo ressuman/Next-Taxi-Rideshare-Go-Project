@@ -45,8 +45,6 @@ export default function CheckOutForm({
     }
   }, [amount]);
 
-  //const paymentAmount = amount ? (amount / 100).toFixed(2) : "0.00";
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -71,7 +69,7 @@ export default function CheckOutForm({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${paymentAmount}`,
+        return_url: `${process.env.NEXT_PUBLIC_STRIPE_RETURN_URL}/payment-success?amount=${paymentAmount}`,
       },
     });
 
