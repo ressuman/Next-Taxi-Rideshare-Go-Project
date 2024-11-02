@@ -16,13 +16,6 @@ interface Car {
 }
 
 export default function Cars() {
-  // const [selectedCar, setSelectedCar] = useState<number | undefined>(undefined);
-
-  // const { directionsData, setDirectionsData } = useContext(
-  //   DirectionsDataContext
-  // );
-  // const { carAmount, setCarAmount } = useContext(SelectedCarAmountContext);
-
   const [selectedCar, setSelectedCar] = useState<number | null>(null);
   const { directionsData } = useContext(DirectionsDataContext) ?? {};
   const { setCarAmount } = useContext(SelectedCarAmountContext) ?? {};

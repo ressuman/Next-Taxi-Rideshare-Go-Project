@@ -12,7 +12,6 @@ import MapboxRoute from "./mapbox-route";
 import DistanceTime from "./distanceTime";
 
 export default function MapboxMap() {
-  //const { userLocation, setUserLocation } = useContext(UserLocationContext);
   const mapRef = useRef<MapRef | null>(null);
   const { userLocation } = useContext(UserLocationContext) ?? {};
   const { sourceCoordinates } = useContext(SourceCoordinatesContext) ?? {};

@@ -6,25 +6,25 @@ import Cars from "./cars";
 import PaymentCards from "./payment-cards";
 import { useRouter } from "next/navigation";
 import { SelectedCarAmountContext } from "@/context/selected-car-amount-context";
-import { convertToSubcurrency } from "@/utils/subCurrency";
+//import { convertToSubcurrency } from "@/utils/subCurrency";
 
 export default function Booking() {
   const router = useRouter();
 
   const { carAmount } = useContext(SelectedCarAmountContext) ?? {};
 
-  // const handleBookClick = () => {
-  //   if (carAmount) {
-  //     router.push(`/payment?amount=${carAmount}`);
-  //   }
-  // };
-
   const handleBookClick = () => {
     if (carAmount) {
-      // Convert to subcurrency before passing in URL
-      router.push(`/payment?amount=${convertToSubcurrency(Number(carAmount))}`);
+      router.push(`/payment?amount=${carAmount}`);
     }
   };
+
+  // const handleBookClick = () => {
+  //   if (carAmount) {
+  //     // Convert to subcurrency before passing in URL
+  //     router.push(`/payment?amount=${convertToSubcurrency(Number(carAmount))}`);
+  //   }
+  // };
 
   return (
     <div className="p-5">

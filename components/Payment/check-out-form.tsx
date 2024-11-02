@@ -20,6 +20,8 @@ export default function CheckOutForm({
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const paymentAmount = amount ? (amount / 100).toFixed(2) : "0.00"; // Display amount in dollars
+
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     if (amount) {
@@ -29,7 +31,7 @@ export default function CheckOutForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount,
+          amount: convertToSubcurrency(amount),
         }),
       })
         .then((res) => {
@@ -43,7 +45,7 @@ export default function CheckOutForm({
     }
   }, [amount]);
 
-  const paymentAmount = amount ? (amount / 100).toFixed(2) : "0.00";
+  //const paymentAmount = amount ? (amount / 100).toFixed(2) : "0.00";
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -4,7 +4,8 @@ export default function PaymentSuccessPage({
   searchParams: { amount: string };
 }>) {
   // Convert amount from string to number and then format it
-  const formattedAmount = amount ? (Number(amount) / 100).toFixed(2) : "0.00";
+  //const formattedAmount = amount ? (Number(amount) / 100).toFixed(2) : "0.00";
+  const formattedAmount = amount ? parseFloat(amount).toFixed(2) : "0.00"; // Display in dollars
 
   return (
     <main className="max-w-6xl mx-auto p-10 text-white text-center border m-10 rounded-md bg-gradient-to-tr from-blue-500 to-purple-500">

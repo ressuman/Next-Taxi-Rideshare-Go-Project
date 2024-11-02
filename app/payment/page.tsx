@@ -18,13 +18,15 @@ export default function PaymentPage() {
   );
 
   // Convert the raw dollar amount to cents using `convertToSubcurrency`
-  const convertedAmount = amount
+  const stripeAmount = amount
     ? convertToSubcurrency(Number(amount))
     : undefined;
 
+  const displayAmount = amount ? parseFloat(amount).toFixed(2) : "0.00"; // Display in dollars for UI
+
   const options: StripeElementsOptions = {
     mode: "payment",
-    amount: convertedAmount,
+    amount: stripeAmount,
     currency: "usd",
   };
 
@@ -36,12 +38,11 @@ export default function PaymentPage() {
           {user?.firstName ?? "Valued User"} 👋🏻
         </h1>
         <h2 className="text-2xl">
-          has requested{" "}
-          <span className="font-bold"> ${Number(amount).toFixed(2)}</span>
+          has requested <span className="font-bold"> ${displayAmount}</span>
         </h2>
       </div>
       <Elements stripe={stripePromise} options={options}>
-        <CheckOutForm amount={convertedAmount} />
+        <CheckOutForm amount={stripeAmount} />
       </Elements>
     </div>
   );
