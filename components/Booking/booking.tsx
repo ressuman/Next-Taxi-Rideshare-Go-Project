@@ -34,20 +34,16 @@ export default function Booking() {
         className="border-[1px] p-5
         rounded-md"
       >
-        {/* <AutocompleteAddress /> */}
         <AutocompleteAddress />
         <Cars />
         <PaymentCards />
         <button
           type="submit"
-          //   className={`w-full bg-yellow-400 p-1 rounded-md
-          // mt-4 ${!carAmount ? "bg-gray-200" : ""}`}
           className={`w-full p-1 rounded-md mt-4 ${
             carAmount ? "bg-yellow-400" : "bg-gray-200 cursor-not-allowed"
           }`}
           disabled={!carAmount}
           onClick={handleBookClick}
-          //onClick={() => router.push("/payment")}
         >
           Book
         </button>
