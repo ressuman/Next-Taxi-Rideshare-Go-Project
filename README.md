@@ -186,7 +186,7 @@ MAPBOX_SESSION_TOKEN=mapbox_session_token
 
 Here is an expected gif/photos of the preview of the App(Next TaxiGo Rideshare)
 
-## ![Next TaxiGo Rideshare gif](./public/next-authentication.gif)
+## ![Next TaxiGo Rideshare gif](./public/taxi-go.gif)
 
 ---
 
