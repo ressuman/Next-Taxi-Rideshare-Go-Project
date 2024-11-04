@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import NavBar from "@/components/navbar";
+import Navbar from "@/components/nav-bar";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -24,7 +24,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={outfit.className}>
-          <NavBar />
+          <Navbar />
           {children}
         </body>
       </html>

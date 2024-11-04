@@ -2,7 +2,7 @@ import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function NavBar() {
+export default function Navbar() {
   return (
     <div className="flex justify-between p-3 px-10 border-b-[1px] shadow-md">
       <div className="flex gap-10 items-center">
